@@ -5,9 +5,9 @@ using UnityEngine;
 public class ForceTest : MonoBehaviour
 {
     public Rigidbody rb;
-    public float speed = 5;
-
-    public bool pressA = false;
+    public Transform left;
+    public Transform right;
+    public Transform engine;
 
     // Start is called before the first frame update
     void Start()
@@ -18,50 +18,19 @@ public class ForceTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.Space))
         {
-            rb.velocity = new Vector3(1, 0, 0);
-        }
-        else
-        {
-            rb.velocity = Vector3.zero;
+            rb.AddForceAtPosition(transform.up * 10, engine.transform.position);
         }
 
-
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
-            pressA = true;
-        }
-        else
-        {
-            pressA = false;
+            rb.AddForceAtPosition(-transform.right, right.transform.position);
         }
 
-        if (Input.GetKey(KeyCode.B))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
-            //rb.AddForce(new Vector3(1, 2, 0) * speed * Time.deltaTime);
-            rb.angularVelocity = new Vector3(1, 0, 0);
-        }
-        else
-        {
-            rb.angularVelocity = Vector3.zero;
-        }
-
-        if (Input.GetKey(KeyCode.C))
-        {
-            rb.AddForce(new Vector3(-2, 0, 0) * speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.AddForce(new Vector3(1, 1, 1) * speed * Time.deltaTime);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (pressA)
-        {
-            rb.AddForce(new Vector3(0, 2, 0) * speed * Time.fixedDeltaTime);
+            rb.AddForceAtPosition(transform.right, left.transform.position);
         }
     }
 }
