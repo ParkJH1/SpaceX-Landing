@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    public float speed = 1f;
-
+    public float speed = 0.1f;
+    
     // Update is called once per frame
     void Update()
     {
-        // (x, y, z) * speed
         if (Input.GetKey(KeyCode.Space))
         {
             transform.position += transform.forward * speed * Time.deltaTime;
@@ -20,7 +19,7 @@ public class Move : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            transform.rotation = Quaternion.Euler(0, -180, 0);
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
