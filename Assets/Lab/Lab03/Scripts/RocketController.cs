@@ -11,6 +11,7 @@ public class RocketController : MonoBehaviour
 
     public bool reset = false;
     public Renderer floorRenderer;
+    public GameObject engineFx;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +61,11 @@ public class RocketController : MonoBehaviour
         if (engineOn)
         {
             rb.AddForce(Vector3.up * force);
+            engineFx.SetActive(true);
+        }
+        else
+        {
+            engineFx.SetActive(false);
         }
     }
 
