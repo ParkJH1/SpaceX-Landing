@@ -8,6 +8,7 @@ using Unity.MLAgents.Actuators;
 public class AgentController2 : Agent
 {
     public RocketController2 rc;
+    public bool episodeFinished = false;
 
     public override void Initialize()
     {
@@ -17,6 +18,7 @@ public class AgentController2 : Agent
     public override void OnEpisodeBegin()
     {
         rc.ResetRocket();
+        episodeFinished = false;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -45,7 +47,30 @@ public class AgentController2 : Agent
         }
     }
 
+    public void EndEpisode(float reward)
+    {
+        SetReward(reward);
+
+        episodeFinished = true;
+        StartCoroutine(WaitCoroutine());
+    }
+
+    IEnumerator WaitCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        EndEpisode();
+    }
+
     public override void Heuristic(in ActionBuffers actionsOut)
     {
+        var discreteActions = actionsOut.DiscreteActions;
+        if (Input.GetKey(KeyCode.Space))
+        {
+            discreteActions[0] = 1;
+        }
+        else
+        {
+            discreteActions[0] = 0;
+        }
     }
 }
