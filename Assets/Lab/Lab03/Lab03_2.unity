@@ -524,7 +524,7 @@ MonoBehaviour:
   floorRenderer: {fileID: 1456698659}
   force: 20
   engineOn: 0
-  initialPosition: {x: 0, y: 20, z: 0}
+  initialPosition: {x: 0, y: 40, z: 0}
   reset: 0
 --- !u!114 &1562885574
 MonoBehaviour:

@@ -20,12 +20,6 @@ public class RocketController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void ResetRocket()
     {
         reset = true;
@@ -50,7 +44,7 @@ public class RocketController : MonoBehaviour
 
         if (reset)
         {
-            transform.position = new Vector3(0, 20, 0);
+            transform.localPosition = new Vector3(0, 20, 0);
             rb.velocity = Vector3.zero;
 
             reset = false;
