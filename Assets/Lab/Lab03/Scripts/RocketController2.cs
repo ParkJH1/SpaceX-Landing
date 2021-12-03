@@ -6,18 +6,20 @@ public class RocketController2 : MonoBehaviour
 {
     public Rigidbody rb;
     public AgentController2 ac;
-    public Renderer floorRenderer;
     public float force = 20f;
     public bool engineOn = false;
 
-    public Vector3 initialPosition = new Vector3(0, 10, 0);
-
     public bool reset = false;
+    public Renderer floorRenderer;
+    public GameObject engineFx;
 
+    public float initHeight = 20;
+
+    // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         ac = GetComponent<AgentController2>();
+        rb = GetComponent<Rigidbody>();
     }
 
     public void ResetRocket()
@@ -44,7 +46,7 @@ public class RocketController2 : MonoBehaviour
 
         if (reset)
         {
-            transform.position = initialPosition;
+            transform.localPosition = new Vector3(0, initHeight, 0);
             rb.velocity = Vector3.zero;
 
             reset = false;
@@ -55,16 +57,22 @@ public class RocketController2 : MonoBehaviour
         if (engineOn)
         {
             rb.AddForce(Vector3.up * force);
+            engineFx.SetActive(true);
+        }
+        else
+        {
+            engineFx.SetActive(false);
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         if (ac.episodeFinished)
         {
             return;
         }
 
+        //Debug.Log(collision.relativeVelocity);
         if (collision.relativeVelocity.y > 10f)
         {
             floorRenderer.material.color = Color.red;
