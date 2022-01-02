@@ -48,7 +48,7 @@ public class RocketControllerFinalR : MonoBehaviour
     public float xzRange = 0;
 
     public Vector3 previousVelocity = Vector3.positiveInfinity;
-    public Vector3 previousDistance = Vector3.positiveInfinity;
+    public float previousDistance = float.PositiveInfinity;
     public float previousAngle = float.PositiveInfinity;
 
     public bool fx = false;
@@ -178,7 +178,7 @@ public class RocketControllerFinalR : MonoBehaviour
             stop = false;
 
             previousVelocity = Vector3.positiveInfinity;
-            previousDistance = Vector3.positiveInfinity;
+            previousDistance = float.PositiveInfinity;
             previousAngle = float.PositiveInfinity;
 
             landingZoneNormal.SetActive(true);
@@ -201,7 +201,7 @@ public class RocketControllerFinalR : MonoBehaviour
             if (Mathf.Abs(Vector3.Dot(transform.up, Vector3.right)) < 0.1 && Mathf.Abs(Vector3.Dot(transform.up, Vector3.forward)) < 0.1 && Vector3.Dot(transform.up, Vector3.up) > 0.9)
             {
                 float distance = Vector3.Distance(Vector3.zero, new Vector3(transform.position.x, 0, transform.position.z));
-                if (distance < 3f)
+                if (distance < 50f)
                 {
                     landingZoneNormal.SetActive(false);
                     landingZoneSuccess.SetActive(true);
@@ -253,7 +253,7 @@ public class RocketControllerFinalR : MonoBehaviour
             ac.AddReward(-0.05f);
         }
 
-        if (previousDistance != Vector3.positiveInfinity && transform.position.magnitude < previousDistance.magnitude)
+        if (previousDistance != float.PositiveInfinity && Vector3.Distance(Vector3.zero, new Vector3(transform.position.x, 0, transform.position.z)) < previousDistance)
         {
             ac.AddReward(0.05f);
         }
@@ -272,7 +272,7 @@ public class RocketControllerFinalR : MonoBehaviour
         }
 
         previousVelocity = rb.velocity;
-        previousDistance = transform.position;
+        previousDistance = Vector3.Distance(Vector3.zero, new Vector3(transform.position.x, 0, transform.position.z));
         previousAngle = Vector3.Angle(Vector3.up, transform.up);
 
         if (mainEngineOn)
