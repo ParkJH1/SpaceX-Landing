@@ -29142,7 +29142,7 @@ MonoBehaviour:
   LandingLeg4: {fileID: 7586950712312902825}
   reset: 0
   stop: 0
-  initHeight: 1000
+  initHeight: 150
   rotationRange: 45
   xzRange: 50
   previousVelocity: {x: Infinity, y: Infinity, z: Infinity}

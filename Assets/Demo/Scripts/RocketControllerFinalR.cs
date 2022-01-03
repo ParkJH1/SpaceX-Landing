@@ -201,7 +201,7 @@ public class RocketControllerFinalR : MonoBehaviour
             if (Mathf.Abs(Vector3.Dot(transform.up, Vector3.right)) < 0.1 && Mathf.Abs(Vector3.Dot(transform.up, Vector3.forward)) < 0.1 && Vector3.Dot(transform.up, Vector3.up) > 0.9)
             {
                 float distance = Vector3.Distance(Vector3.zero, new Vector3(transform.position.x, 0, transform.position.z));
-                if (distance < 50f)
+                if (distance < 3f)
                 {
                     landingZoneNormal.SetActive(false);
                     landingZoneSuccess.SetActive(true);
